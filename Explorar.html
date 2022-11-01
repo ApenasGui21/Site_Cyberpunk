@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore NC</title>
+    <link rel="shortcut icon" href="img/logo.webp" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/style_menu.css">
+    <link rel="stylesheet" href="css/style_musicas.css">
+    <script src="js/menus.js" defer></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body>
+    <div class="container2">  <!--  <<<<<--style_musicas -->
+        <div class="divfr">  <!-- LOGO CYBERPUNK -->
+            <a href="index.html" class="logo"> <img src="img/Cb2077.png" id="NCTlogo"> </a>
+        </div>
+        
+        <div class="divfr">   <!-- FAIXA DE MÚSICA -->
+                <div class="hero">  
+                    <div class="music">
+                        <img src="img/musicas/fotomusica.jfif" alt="Carregando" id="imgMusica">
+                        <div class="info">
+                            <h2 id="nomemusica">Cyberpunk 2077 - Theme music (1/7)</h2>
+                
+                            <div id="waveform"></div>
+                
+                            <div class="controls">
+                                <img src="img/musicas/play.png" alt="Play" id="playBtn">
+                                <img src="img/musicas/previous.png" alt="Pause" id="previousBtn" style="width: 0.8vw;" class="espaco">
+                                <img src="img/musicas/stop.png" alt="Pause" id="stopBtn">
+                                <img src="img/musicas/next.png" alt="Pause" id="nextBtn" style="width: 0.8vw;">
+                                
+
+                                <img src="img/musicas/volume.png" alt="Volume" id="volumeBtn" class="espaco">
+                                <img src="img/musicas/minus.png" alt="Minus" id="minusBtn">
+                                <progress id="progresso" value="0.05" max="0.1" style="margin-right: 1vw; width: 10vw;"></progress>
+                                <img src="img/musicas/plus.webp" alt="Plus" id="plusBtn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="divfr">  <!-- MENU INTERATIVO -->
+            <ul class="navbar_menu">  
+                <li class="navbar_item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="#" class="dropdown">Menu</a>
+                    <div class="submenu">  <!-- MENU DROPDOWN -->
+                        <img src="img/menufoto.jpg" alt="Imagem">
+                        <div class="submenu_itens">
+                            <div class="submenu_item" onclick="location.href='index.html';">
+                              
+                                <h4>Sobre</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Explorar.html';">
+                                
+                                <h4>Explorar</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Mapa.html';">
+                               
+                                <h4>Mapa</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='AreaCadastro.php';">
+                              
+                                <h4>Cadastro</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Arquivo.html';">
+                                
+                                <h4>Verificar arquivo</h4>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="navbar_item">
+                    <a href="https://www.cyberpunk.net/us/pt-br/" target="_blank">Official Site</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sec">
+        <p>&nbsp;</p>
+        <br><br><br>
+        <h2>Notícias de Night City</h2>
+        <div class = "container3">
+            <div class="card3">
+                <div class="imgBox3">
+                    <img src="img/300.webp">
+                </div>
+                <div class="details3">
+                    <h2>ALERTA</h2>
+                    <p>No dia de hoje,o setor norte de Watson foi rapidamente lançado ao caos quando uma briga
+                         entre as gangues Maelstrom e 6th Street ocorreu no local. Diversos membros, cabeças e
+                          cyberwares voaram quando toda a tensão entre ambas as gangues explodiu após um acidente
+                           com uma carga preciosa pertencenta a uma das gangues. Qualquer infeliz cidadão que 
+                           passava ou morava no local também foi alvo da briga, com o Trauma Team sendo acionado 
+                           diversas vezes na tentativa de resgatar alguns civis com Plano Premium do local. 
+                           A NCPD rapidamente se direcionou ao local, porém devido ao tamanho do conflito a 
+                           C-SWAT foi acionada, sendo bem possível que esse conflito se arraste para fora de
+                            Watson caso ele continue.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class = "container3">
+            <div class="card3">
+                <div class="imgBox3">
+                    <img src="img/400.jpg">
+                </div>
+                <div class="details4">
+                    <h2>Inimigo do meu Inimigo!</h2>
+                    <p>Uma guerra de gangues também ocorreu nesse fim de semana, com um combate ocorrendo 
+                        entre os Guarras de Tigre e as Mox. O tiroteio foi curto, durando apenas 30 minutos,
+                        pois ambos os lados descobriram que suas armas tinha um erro fatal : O material
+                        utilizado em sua impressão 3D era de baixa qualidade. Dessa forma então ambas as gangues
+                         sofreram diversas baixas devido a essas armas tão baratas explodindo nas mãos dos 
+                         usuários. Dentro de 24 horas desse conflito, um jovem conhecido como "Fast Print" 
+                         foi encontrado morto e pendurado de um telhado em Heywood, com um buraco em sua cabeça
+                          e as palavras "barato" carvadas em seu peito. Logo embaixo dele foram encontradas 
+                          diversas armas quebradas a qual a NCPD acredita que ele tenha vendido. Por mais que 
+                          a morte do jovem seja trágica, ambas as gangues concordaram em um cessar fogo até que 
+                          elas possam comprar armas mais confiáveis.</p>
+
+                </div>
+            </div>
+        </div>
+            <h2>Os Bairros de Night City</h2>
+            <div class="container">
+                <div class="card">
+                    <div class="imgBox">
+                        <img src="img/CityCenter1.webp">
+                    </div>
+                    <div class="contentBox">
+                        <div class="content">
+                            <h3>Centro da Cidade</h3>
+                            <p> A joia de Night City ! O centro da cidade é o coração que mantém Night City viva, com
+                                seus deslumbrosos arranhas ceús corporativos e grandes logos Neon iluminando a cidade, não a lugar melhor para 
+                                visitar em Night City! 
+                            </p>
+                            <a href="CentroCidade.html"> Descubra mais</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="card">
+                <div class="imgBox">
+                    <img src="img/Heywood1.webp">
+                </div>
+                <div class="contentBox">
+                    <div class="content">
+                        <h3>Heywood</h3>
+                        <p> Heywood pode não ser o lado mais exibido de Night City, mas é exatamente onde você e sua família
+                            vão querer morar na cidade! Com uma grande variedade de lojas, restaurantes e entretenimento, Heywood
+                            é o local ideal para sua família, apenas tome cuidado com os Valentinos!!
+                        </p>
+                        <a href="Heywood.html"> Descubra mais</a>
+                    </div>
+                </div>
+        </div>
+        <div class="card">
+            <div class="imgBox">
+                <img src="img/Pacifica1.webp">
+            </div>
+            <div class="contentBox">
+                <div class="content">
+                    <h3>Pacifica</h3>
+                    <p>"NÃO VÁ PARA PACIFICA", essa é a primeira coisa que você irá ouvir ao comentar do bairro.
+                        Abandonada pelas autoridades, Pacifica tem se tornardo cada vez mais controlada por gangues,
+                        assim prejudicando sua popularidade como um ótimo passeio para os visitantes de Night city.
+                    </p>
+                    <a href="Pacifica.html"> Descubra mais</a>
+                </div>
+            </div>
+    </div>
+    <div class="card">
+        <div class="imgBox">
+            <img src="img/SantoDomingo1.webp">
+        </div>
+        <div class="contentBox">
+            <div class="content">
+                <h3>Santo Domingo</h3>
+                <p> O pulmão de Night City! Santo Domingo fornece toda a energia para alimentar
+                    Night City em todo seu explendor! E assim como a cidade, suas fábricas e usinas nunca dormem,
+                    então não precisa se preocupar, pois sua placa Neon não vai apagar tão cedo se depender de Santo Domingo!
+                </p>
+                <a href="SantoDomingo.html"> Descubra mais</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="imgBox">
+            <img src="img/Westbrook1.webp">
+        </div>
+        <div class="contentBox">
+            <div class="content">
+                <h3>Westbrook</h3>
+                <p> Você acabou de demitir 100 funcionários e precisa de um lugar para relaxar ? Então Westbrook está a sua disposição!
+                    Com diversos tipos de entretenimento dísponiveis, Westbrook deslumbra seus sentidos com Japantown, onde o melhor da 
+                    cultura oriental está a 1 chip de distância!    </p>
+                <a href="Westbrook.html"> Descubra mais</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="imgBox">
+            <img src="img/Watson1.webp">
+        </div>
+        <div class="contentBox">
+            <div class="content">
+                <h3>Watson</h3>
+                <p> Um antigo polo de Night City nos tempos RED, agora Watson se torna o lar da esperança de crescimento em Night City!
+                    Povoado por chums de todo lugar do globo, Watson permite aos imigrantes um lugar para ficar enquanto escalam a íncrível escada do 
+                    mundo corporativo!
+                </p>
+                <a href="Watson.html"> Descubra mais</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="imgBox">
+            <img src="img/TheBadlands1.webp">
+        </div>
+        <div class="contentBox">
+            <div class="content">
+                <h3><a href="raspa.html" target="_blank"> The Badlands</a></h3>
+                <p> As Badlands se encontram fora dos limites de Night City, sendo extremamente perigosos e lar de diversas gangues nômades, assim
+                    a Night City NEWS não recomenda essa região, porém caso você ainda queira á visitar, lembre-se de sempre estar dentro
+                    de um carro a prova de balas quando estiver por lá.
+                </p>
+                <a href="TheBadlands.html"> Descubra mais</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>   
+
+ <script>  /* Script da música */
+    var playBtn = document.getElementById("playBtn")  /* Declarando variáveis dos controles do áudio */
+    var stopBtn = document.getElementById("stopBtn")
+    var volumeBtn = document.getElementById("volumeBtn")
+    var plusBtn = document.getElementById("plusBtn")
+    var minusBtn = document.getElementById("minusBtn")
+    var nextBtn = document.getElementById("nextBtn")
+    var previousBtn = document.getElementById("previousBtn")
+
+    let volumeM = 0.05;
+
+    var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: 'violet',
+        progressColor: 'purple',  /* Arrumar cor */
+        barWidth: 4,
+        height: 50,
+        resposive: true,
+        hideScrollbar: true,
+        barRadius: 4,
+    });  /* declarando função wavesurfer */
+
+    playBtn.onclick = function() { /* função PLAY/PAUSE */
+        playF();
+    }
+    function playF() {
+            wavesurfer.playPause();
+        if(playBtn.src.includes("img/musicas/play.png")) {
+            playBtn.src = "img/musicas/pause.png";
+        } else {
+            playBtn.src = "img/musicas/play.png";
+        }
+    }
+    stopBtn.onclick = function() {  /* função STOP */
+        wavesurfer.stop();
+        playBtn.src = "img/musicas/play.png";
+    }
+    volumeBtn.onclick = function() {  /* função MUTAR */
+        wavesurfer.toggleMute();
+        if(volumeBtn.src.includes("volume.png")) {
+            volumeBtn.src = "img/musicas/mute.png";
+        } else {
+            volumeBtn.src = "img/musicas/volume.png";
+        }
+    }
+    wavesurfer.setVolume(volumeM);
+    minusBtn.onclick = function() {  /* função AUMENTAR */
+        if(volumeM > 0.005) {
+            volumeM -= 0.01;
+        } else {
+            alert('Volume mínimo!');
+        }
+        wavesurfer.setVolume(volumeM);
+        document.getElementById("progresso").value = volumeM;
+    }
+    plusBtn.onclick = function() {  /* função DIMINUIR */
+        if(volumeM < 0.095) {
+            volumeM += 0.01;
+            if (volumeM > 0.095) {
+                volumeM = 0.1;
+            }
+        } else {
+            alert('Volume máximo!');
+        }
+        document.getElementById("progresso").value = volumeM;
+        wavesurfer.setVolume(volumeM);
+    }
+    wavesurfer.on('finish', function () {  /* função termina a música */
+        playBtn.src = "img/musicas/play.png"
+        nextF();
+        const myTimeout = setTimeout(playF, 3000);
+    });
+
+
+    /*  Playlist */
+
+    let proximamusica = 0;
+    let firstmusica = 0;
+    let imgMus;
+
+    if (firstmusica == 0) {
+            wavesurfer.load('media/Hyper-SpoilerCyberpunk2077.mp3');
+        }
+
+    var matrizPlaylist = ['Cyberpunk 2077 - Theme music', 'Maelstrom Combat Theme', 'Max Brhon - Cyberpunk', 'Militech Combat Theme', 'NCPD Combat Theme', 'The Rebel Path', 'Valentinos Combat Theme'];  /* Nome das músicas */
+
+    nextBtn.onclick = function() {
+        nextF();
+    }
+    function nextF() {    /* função next */
+        playBtn.src = "img/musicas/play.png";
+
+        if (proximamusica == 6) {
+            proximamusica = 0;
+            firstmusica += 1;
+        } else {
+            proximamusica += 1;
+        }
+        document.getElementById('nomemusica').innerHTML = ''+ matrizPlaylist[proximamusica] + ' (' + (proximamusica+1) + '/7)';
+
+        playlist_musica()
+    }
+    previousBtn.onclick = function() {    /* função previous */
+        playBtn.src = "img/musicas/play.png";
+
+        if (proximamusica == 0) {
+            proximamusica = 6;
+            firstmusica += 1;
+        } else {
+            proximamusica -= 1;
+        }
+        document.getElementById('nomemusica').innerHTML = ''+ matrizPlaylist[proximamusica]  + ' (' + (proximamusica+1) + '/7)';
+
+        playlist_musica()
+    }
+
+    function playlist_musica() {  /* Locais das músicas */
+        if (proximamusica == 0) {
+            wavesurfer.load('media/Hyper-SpoilerCyberpunk2077.mp3');
+            imgMus = 'img/musicas/fotomusica.jfif';
+        } else if (proximamusica == 1) {
+            wavesurfer.load('media/Maelstrom Combat Theme.mp3');
+            imgMus = 'img/musicas/img1.png';
+        } else if (proximamusica == 2){
+            wavesurfer.load('media/Max Brhon - Cyberpunk.mp3');
+            imgMus = 'img/musicas/img7.jfif';
+        } else if (proximamusica == 3){
+            wavesurfer.load('media/Militech Combat Theme.mp3');
+            imgMus = 'img/musicas/img2.webp';
+        } else if (proximamusica == 4){
+            wavesurfer.load('media/NCPD Combat Theme.mp3');
+            imgMus = 'img/musicas/img3.webp';
+        } else if (proximamusica == 5){
+            wavesurfer.load('media/The Rebel Path.mp3');
+            imgMus = 'img/musicas/img4.jfif';
+        } else if (proximamusica == 6){
+            wavesurfer.load('media/Valentinos Combat Theme.mp3');
+            imgMus = 'img/musicas/img5.jpg';
+        }  
+        document.getElementById("imgMusica").src = imgMus; 
+    }  /* Se adicionar música, mude o parâmetro proximamusica nas funçoes previous e next */
+</script>
+
+</body>
+</html>

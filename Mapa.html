@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
+     integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
+     crossorigin=""></script>
+
+     <link rel="stylesheet" href="css/style_exp.css">
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+     <title>Mapa de Night City</title>
+     <link rel="shortcut icon" href="img/logo.webp" type="image/x-icon">
+ 
+     <link rel="stylesheet" type="text/css" href="css/style.css">
+     <link rel="stylesheet" href="css/style_menu.css">
+     <link rel="stylesheet" href="css/style_musicas.css">
+     <script src="js/menus.js" defer></script>
+     <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+
+<body>
+    <div class="container2">  <!--  <<<<<--style_musicas -->
+        <div class="divfr">  <!-- LOGO CYBERPUNK -->
+            <a href="index.html" class="logo"> <img src="img/Cb2077.png" id="NCTlogo"> </a>
+        </div>
+        
+        <div class="divfr">   <!-- FAIXA DE MÚSICA -->
+                <div class="hero">  
+                    <div class="music">
+                        <img src="img/musicas/fotomusica.jfif" alt="Carregando" id="imgMusica">
+                        <div class="info">
+                            <h2 id="nomemusica">Cyberpunk 2077 - Theme music (1/7)</h2>
+                
+                            <div id="waveform"></div>
+                
+                            <div class="controls">
+                                <img src="img/musicas/play.png" alt="Play" id="playBtn">
+                                <img src="img/musicas/previous.png" alt="Pause" id="previousBtn" style="width: 0.8vw;" class="espaco">
+                                <img src="img/musicas/stop.png" alt="Pause" id="stopBtn">
+                                <img src="img/musicas/next.png" alt="Pause" id="nextBtn" style="width: 0.8vw;">
+                                
+
+                                <img src="img/musicas/volume.png" alt="Volume" id="volumeBtn" class="espaco">
+                                <img src="img/musicas/minus.png" alt="Minus" id="minusBtn">
+                                <progress id="progresso" value="0.05" max="0.1" style="margin-right: 1vw; width: 10vw;"></progress>
+                                <img src="img/musicas/plus.webp" alt="Plus" id="plusBtn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="divfr">  <!-- MENU INTERATIVO -->
+            <ul class="navbar_menu">  
+                <li class="navbar_item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="navbar_item">
+                    <a href="#" class="dropdown">Menu</a>
+                    <div class="submenu">  <!-- MENU DROPDOWN -->
+                        <img src="img/menufoto.jpg" alt="Imagem">
+                        <div class="submenu_itens">
+                            <div class="submenu_item" onclick="location.href='index.html';">
+                              
+                                <h4>Sobre</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Explorar.html';">
+                                
+                                <h4>Explorar</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Mapa.html';">
+                               
+                                <h4>Mapa</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='AreaCadastro.php';">
+                              
+                                <h4>Cadastro</h4>
+                            </div>
+                            <div class="submenu_item" onclick="location.href='Arquivo.html';">
+                                
+                                <h4>Verificar arquivo</h4>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="navbar_item">
+                    <a href="https://www.cyberpunk.net/us/pt-br/" target="_blank">Official Site</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="map">
+        <style>
+            #map { 
+                position: absolute; top:500px; bottom:0; right:0; left:0;
+                height: 512px;
+                margin: auto;
+                width: 451px ; }
+
+            #sec {
+                top: 900px;
+            }
+            
+            #teste {
+                position: absolute; top: 100px;; bottom:500; right:0; left:0;
+                display: table;
+                margin: auto;
+                color: #F3E600;
+            }
+        </style>
+    </div>
+    <script>
+    //Variables
+        var mapSW = [0,2560],
+        mapNE = [2255,0];
+        
+        var icon = L.icon({
+            iconUrl: 'img/Icone2.png',
+
+            iconSize: [23,34],
+            iconAnchor: [25,25],
+            popupAnchor: [-13, 0]
+        });
+        var iconeH = L.icon({
+            iconUrl: 'img/vcicon.png',
+
+            iconSize: [10,28],
+            iconAnchor: [25,25],
+            popupAnchor: [-19, -28]
+        });
+
+
+        console.log(5+5);
+        var bounds = [[-208,-42],[48,183.5]];
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: 1,
+            maxZoom: 4,
+    });
+
+    var image = L.imageOverlay('img/CMap.jpg', bounds).addTo(map);
+    map.fitBounds(bounds);
+    map.setMaxBounds(new L.LatLngBounds(
+        map.unproject(mapSW,map.getMaxZoom()),
+        map.unproject(mapNE,map.getMaxZoom()),
+        ));
+    var layerGroup = L.layerGroup().addTo(map);
+    add_marker();
+
+
+    function add_marker() {
+        console.log(5-2);
+            var points = [
+                ["Pacifica", -108, 29, "Pacifica.html"],
+                ["Santo Domingo", -84, 62, "SantoDomingo.html"],
+                ["Heywood",-82, 34, "Heywood.html"],
+                ["Centro da Cidade", -56, 36, "CentroCidade.html"],
+                ["Westbrook", -50, 61, "Westbrook.html"],
+                ["Watson", -24, 36, "Watson.html"]
+            ];
+            var marker = [];
+            var i;
+            for (i = 0; i < points.length; i++) {
+                marker[i] = new L.Marker([points[i][1], points[i][2]], {
+                    win_url: points[i][3],
+                    icon: icon
+                });
+                marker[i].addTo(map);
+                marker[i].bindPopup(points[i][0]).openPopup();
+                marker[i].on('mouseover',function(ev) {
+                    ev.target.openPopup();
+                });
+                marker[i].on('click', onClick);
+                layerGroup.addLayer(marker[i]);
+            };
+        }
+        add_marker();
+
+
+
+        var PacificaP = L.polygon([
+        [-86.6875, 30],
+        [-86.3125, 20.875],
+        [-95.25, 11.75],
+        [-108,7],
+        [-118.625,18.375],
+        [-109.875,41],
+        [-98.625,48.875],
+        [-86.875,38.625]
+        ], {color: 'red',weight : 2});
+
+        var SantoDomingoP = L.polygon([
+        [-72.6875, 48.75],
+        [-73, 49.5],
+        [-62.8125, 56.875],
+        [-65.6875, 61],
+        [-65.25, 61.4375],
+        [-71.5, 71.1875],
+        [-70.75, 76.625],
+        [-69.8125, 80.875],
+        [-69, 83.6875],
+        [-72, 86.375],
+        [-74.5, 87.375],
+        [-83.875, 85.3125],
+        [-82.75, 86.375],
+        [-94.8125, 83.75],
+        [-96.3125, 83.625],
+        [-99.6875, 81.5],
+        [-99.875, 80.5625],
+        [-101.625, 80.0625],
+        [-104.4375, 76.75],
+        [-108, 75.25],
+        [-109.3125, 73.6875],
+        [-107.875, 68.8125],
+        [-103.3125, 66.5625],
+        [-103.6875, 58.6875],
+        [-100.8125, 54.375],
+        [-101.875, 54],
+        [-98.5625, 49],
+        [-89.4375, 40.625],
+        //[-88.5625, 38.9375],
+        [-86.875,38,625]
+        ], {color: '#F3E600',weight : 2});
+
+        var HeywoodP = L.polygon([
+        [-86.875,38,625],
+        [-72.6875, 48.75],
+        [-73, 49.5],
+        [-62.8125, 56.875],
+        [-58.25, 49.8125],
+        [-59, 48.875],
+        [-60.25, 43.0625],
+        [-62.25, 43.25],
+        [-63.8125, 42.875],
+        [-65.25, 41.875],
+        [-66.875, 40.4375],
+        [-67.625, 37.8125],
+        [-67.25, 34.875],
+        [-65.9375, 33.125],
+        [-63.3125, 31.625],
+        [-62.0625, 31.375],
+        [-62.0625, 26.5],
+        [-61.6875, 12.125],
+        [-75, 13.25],
+        [-77.0625, 14.1875],
+        [-77.4375, 15.0625],
+        [-79.1875, 15.9375],
+        [-81.4375, 20.0625],
+        [-84.5, 21.375],
+        [-84.5625, 20.1875],
+        [-86.3125, 20.875],
+        [-86.6875, 30]
+        ], {color: '#F3E600',weight : 2});
+
+        var CityCenterP = L.polygon([
+        [-58.25, 49.8125],
+        [-56.625, 50.125],
+        [-50.375, 47],
+        [-45.25, 42.6875],
+        [-45.8125, 32.125],
+        [-45.625, 24.0625],
+        [-49.375, 17.4375],
+        [-45.4375, 13],
+        [-50.8125, 7.75],
+        [-55.3125, 12.625],
+        [-61.6875, 12.125],
+        [-62.0625, 26.5],
+        [-62.0625, 31.375],
+        [-63.3125, 31.625],
+        [-65.9375, 33.125],
+        [-67.25, 34.875],
+        [-67.625, 37.8125],
+        [-66.875, 40.4375],
+        [-65.25, 41.875],
+        [-63.8125, 42.875],
+        [-62.25, 43.25],
+        [-60.25, 43.0625],
+        [-59, 48.875]
+        ], {color: 'blue',weight : 2});
+
+        var WestbrookP = L.polygon([
+        [-45.25, 42.6875],
+        [-50.375, 47],
+        [-56.625, 50.125],
+        [-58.25, 49.8125], 
+        [-62.8125, 56.875],
+        [-65.6875, 61],
+        [-65.25, 61.4375],
+        [-71.5, 71.1875],
+        [-70.75, 76.625],
+        [-69.8125, 80.875],
+        [-69, 83.6875],
+        [-63.6875, 82.8125],
+        [-63.9375, 81.5625],
+        [-55.375, 74.5],
+        [-55.0625, 68.875],
+        [-50.9375, 63.3125],
+        [-45.25, 62],
+        [-44.875, 62.9375],
+        [-43.875, 62.625],
+        [-43.625, 63.3125],
+        [-38, 61.5625],
+        [-35.5, 61.8125],
+        [-32.125, 63.6875],
+        [-24, 62],
+        [-22.5, 61.375],
+        [-22.0625, 60.6875],
+        [-21.9375, 60.375],
+        [-25.1875, 59.8125],
+        [-27.4375, 57.1875],
+        [-28, 56.5625],
+        [-30.5625, 51],
+        [-31.9375, 49.0625],
+        [-34.5625, 47.3125],
+        [-38.125, 47.1875],
+        [-38.375, 45.8125],
+        [-43, 44.25],
+        [-45.25, 42.6875]
+        ], {color: '#F3E600',weight : 2});
+
+
+        var WatsonP = L.polygon([
+        [-45.375, 23.875],
+        [-39.5625, 21.8125],
+        [-39.375, 21.625],
+        [-33.3125, 19.5],
+        [-30.125, 9.625],
+        [-29.8125, 9],
+        [-27.875, 2.9375],
+        [-26.0625, 3.25],
+        [-26.3125, 3.6875],
+        [-10, 7.25],
+        [-2.3125, 19.4375],
+        [-1.9375, 26.125],
+        [1.75, 32.1875],
+        [1.875, 30.9375],
+        [5.9375, 36.75],
+        [8.875, 44.625],
+        [8.375, 49.5625],
+        [7.125, 53.6875],
+        [4.25, 58.0625],
+        [1.875, 58.375],
+        [1.6875, 57.375],
+        [-1.625, 57.875],
+        [-16.25, 64.5625],
+        [-20.75, 60.125],
+        [-22.5, 61.375],
+        [-22.0625, 60.6875],
+        [-21.9375, 60.375],
+        [-25.1875, 59.8125],
+        [-27.4375, 57.1875],
+        [-28, 56.5625],
+        [-30.5625, 51],
+        [-31.9375, 49.0625],
+        [-34.5625, 47.3125],
+        [-38.125, 47.1875],
+        [-38.375, 45.8125],
+        [-43, 44.25],
+        [-45.25, 42.6875],
+        [-45.8125, 32.125],
+        [-45.625, 24.0625]
+        ], {color: '#F3E600',weight : 2});
+
+
+        var markerD = L.marker(map.unproject ([1500, 1500], map.getMaxZoom()),{icon: iconeH}). addTo (map);
+        markerD.dragging.enable();
+        markerD.bindPopup('<b>Voce está aqui!! <br /> Se você quiser, é so mover sua posição!!</b›').openPopup();
+        markerD.on('dragend',function(e){
+        markerD.getPopup().setContent('A sua posição atual é : ' + markerD.getLatLng().toString())
+        .openOn(map);
+        });
+        var bairros = L.layerGroup([PacificaP,SantoDomingoP,HeywoodP,CityCenterP,WestbrookP,WatsonP]);
+        var overlay = {'Informações': layerGroup,'Bairros': bairros};
+        var layerControl = L.control.layers(null, overlay).addTo(map);
+
+        function onClick(e) {
+            console.log(this.options.win_url);
+            window.open(this.options.win_url);
+        }
+    </script>
+
+<div class="teste" id="teste">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <h1>SE LOCALIZE EM NIGHT CITY !</h1>
+</div>
+
+<br><br><br><br><br><br><br><br>
+<div class="sec" id="sec">
+    <p> Night City é uma grande cidade, e por isso nem sempre é facil se localizar nela!! Dos luxuosos bairros onde grandes corporações como Arasaka e Militech se localizam até os
+        perigosos becos de Pacífica, Night City é rexeada de oportunidade e perigos em toda Esquina. Dessa forma então nós da NC NEWS decídimos informar a você por meio desse mapa
+        onde você e seus chums podem ir sem se preocupar em sair com seu colete a prova de balas.<br> Por meio então do mapa interativo acima você pode visualizar Night City em 
+        toda a sua glória, além de rapidamente poder descobrir o nome de qualquer um de seus bairros apenas passando seu cursor por cima dos pontos de interesse!<br>
+        Além disso o menu presente na aba lateral superior direita do mapa permite a você o poder de ligar/desligar os marcadores de informações (os quais em apenas um clique podem 
+        te levar a uma página para te falar mais dos bairros de nossa incrível cidade!), além de também ser possível ligar a opção de visualização dos bairros, o qual permite uma visualização
+        do mapa onde cada bairro é delimitado por um polígono, além de por meio de sua cor já ser possível saber se a região está segura ou não no momento!!<br>
+        Caso o bairro tenha uma cor azulada, não precisa nem se preocupar, é só escolher o seu melhor estilo e ir curtir! Se o bairro estiver amarelo, você estará indo pra um lugar arris
+        cado, mas nada que alguns chromes e uma atitude apropriada não resolvam! Porém se o bairro estiver em vermelho, você estará brincando com a sorte ao decidir visitar este
+        bairro. Ataques de Cyberpsicose, gangues como Maelstrom, 6th Street e os aterrozizantes Bozos podem estar brigando nessa região, então NÃO RECOMENDAMOS IR PARA ESSAS ÁREAS!!!
+        (A Night City NEWS não se responsabiliza por qualquer tipo de acidente ou ocorrência acontecida com qualquer usuário devido ao uso da função de visualização dos bairros do mapa).<br>
+        Por fim, caso você esteja perdido é so locomover o ícone verde para descobrir exatamente a sua ou a localização de qualquer lugar do mapa, assim você pode facilmente chamar o Ser
+        viço de taxis DELAMAIN para ir a qualquer lugar de Night City de forma segura, rápida e confortável !<br> Ah,  e nem se preocupe em sair do mapa, o mesmo automaticamente
+        se ajusta a suas bordas, então pode mexer nele o quanto quiser, que ele sempre volta pro lugar ;)
+    </p>
+        <p>&nbsp;</p>
+</div>
+
+<script>  /* Script da música */
+    /*const myTimeout = setTimeout(playF, 5000);  /* Caso queira tirar a música automatica, comente essa linha */
+    var playBtn = document.getElementById("playBtn")  /* Declarando variáveis dos controles do áudio */
+    var stopBtn = document.getElementById("stopBtn")
+    var volumeBtn = document.getElementById("volumeBtn")
+    var plusBtn = document.getElementById("plusBtn")
+    var minusBtn = document.getElementById("minusBtn")
+    var nextBtn = document.getElementById("nextBtn")
+    var previousBtn = document.getElementById("previousBtn")
+
+    let volumeM = 0.05;
+
+    var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: 'violet',
+        progressColor: 'purple',  /* Arrumar cor */
+        barWidth: 4,
+        height: 50,
+        resposive: true,
+        hideScrollbar: true,
+        barRadius: 4,
+    });  /* declarando função wavesurfer */
+
+    playBtn.onclick = function() { /* função PLAY/PAUSE */
+        playF();
+    }
+    function playF() {
+            wavesurfer.playPause();
+        if(playBtn.src.includes("img/musicas/play.png")) {
+            playBtn.src = "img/musicas/pause.png";
+        } else {
+            playBtn.src = "img/musicas/play.png";
+        }
+    }
+    stopBtn.onclick = function() {  /* função STOP */
+        wavesurfer.stop();
+        playBtn.src = "img/musicas/play.png";
+    }
+    volumeBtn.onclick = function() {  /* função MUTAR */
+        wavesurfer.toggleMute();
+        if(volumeBtn.src.includes("volume.png")) {
+            volumeBtn.src = "img/musicas/mute.png";
+        } else {
+            volumeBtn.src = "img/musicas/volume.png";
+        }
+    }
+    wavesurfer.setVolume(volumeM);
+    minusBtn.onclick = function() {  /* função AUMENTAR */
+        if(volumeM > 0.005) {
+            volumeM -= 0.01;
+        } else {
+            alert('Volume mínimo!');
+        }
+        wavesurfer.setVolume(volumeM);
+        document.getElementById("progresso").value = volumeM;
+    }
+    plusBtn.onclick = function() {  /* função DIMINUIR */
+        if(volumeM < 0.095) {
+            volumeM += 0.01;
+            if (volumeM > 0.095) {
+                volumeM = 0.1;
+            }
+        } else {
+            alert('Volume máximo!');
+        }
+        document.getElementById("progresso").value = volumeM;
+        wavesurfer.setVolume(volumeM);
+    }
+    wavesurfer.on('finish', function () {  /* função termina a música */
+        playBtn.src = "img/musicas/play.png"
+        nextF();
+        const myTimeout = setTimeout(playF, 3000);
+    });
+
+
+    /*  Playlist */
+
+    let proximamusica = 0;
+    let firstmusica = 0;
+    let imgMus;
+
+    if (firstmusica == 0) {
+            wavesurfer.load('media/Hyper-SpoilerCyberpunk2077.mp3');
+        }
+
+    var matrizPlaylist = ['Cyberpunk 2077 - Theme music', 'Maelstrom Combat Theme', 'Max Brhon - Cyberpunk', 'Militech Combat Theme', 'NCPD Combat Theme', 'The Rebel Path', 'Valentinos Combat Theme'];  /* Nome das músicas */
+
+    nextBtn.onclick = function() {
+        nextF();
+    }
+    function nextF() {    /* função next */
+        playBtn.src = "img/musicas/play.png";
+
+        if (proximamusica == 6) {
+            proximamusica = 0;
+            firstmusica += 1;
+        } else {
+            proximamusica += 1;
+        }
+        document.getElementById('nomemusica').innerHTML = ''+ matrizPlaylist[proximamusica] + ' (' + (proximamusica+1) + '/7)';
+
+        playlist_musica()
+    }
+    previousBtn.onclick = function() {    /* função previous */
+        playBtn.src = "img/musicas/play.png";
+
+        if (proximamusica == 0) {
+            proximamusica = 6;
+            firstmusica += 1;
+        } else {
+            proximamusica -= 1;
+        }
+        document.getElementById('nomemusica').innerHTML = ''+ matrizPlaylist[proximamusica]  + ' (' + (proximamusica+1) + '/7)';
+
+        playlist_musica()
+    }
+
+    function playlist_musica() {  /* Locais das músicas */
+        if (proximamusica == 0) {
+            wavesurfer.load('media/Hyper-SpoilerCyberpunk2077.mp3');
+            imgMus = 'img/musicas/fotomusica.jfif';
+        } else if (proximamusica == 1) {
+            wavesurfer.load('media/Maelstrom Combat Theme.mp3');
+            imgMus = 'img/musicas/img1.png';
+        } else if (proximamusica == 2){
+            wavesurfer.load('media/Max Brhon - Cyberpunk.mp3');
+            imgMus = 'img/musicas/img7.jfif';
+        } else if (proximamusica == 3){
+            wavesurfer.load('media/Militech Combat Theme.mp3');
+            imgMus = 'img/musicas/img2.webp';
+        } else if (proximamusica == 4){
+            wavesurfer.load('media/NCPD Combat Theme.mp3');
+            imgMus = 'img/musicas/img3.webp';
+        } else if (proximamusica == 5){
+            wavesurfer.load('media/The Rebel Path.mp3');
+            imgMus = 'img/musicas/img4.jfif';
+        } else if (proximamusica == 6){
+            wavesurfer.load('media/Valentinos Combat Theme.mp3');
+            imgMus = 'img/musicas/img5.jpg';
+        }  
+        document.getElementById("imgMusica").src = imgMus; 
+    }  /* Se adicionar música, mude o parâmetro proximamusica nas funçoes previous e next */
+</script>
+
+
+</script>
+</body> 

@@ -1,0 +1,164 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+/*  Começo do cabeçalho  */
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 50px;
+    align-items: center;
+    gap: 50px;
+}
+
+.navbar_logo a {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
+.heade {
+    width: 33.3%;
+}
+
+.navbar_menu {
+    list-style: none;
+    display: flex;
+    position: absolute;
+    z-index: 10000;
+}
+
+.navbar_item {
+    position: relative;
+}
+
+.navbar_item:not(:first-child) {
+    margin-left: 1vw;
+}
+
+.navbar_item a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5vw;  /* Tamanho letras menu fora */
+    padding: 0 5px;
+    margin-left: 0.5vw;
+    border: solid 2px rgba(0, 255, 255, 0.504);
+    border-radius: 6px;
+}
+
+.navbar_item a:hover {
+    background-color: rgba(255, 255, 0, 0.4);
+}
+
+.submenu {
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 5px);
+    max-width: max-content;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 4px 5px 10px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(15%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s, opacity 0.3s;
+    background-color: white;
+}
+
+.submenu.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    margin-top: 28px;
+}
+
+.submenu img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.submenu_itens {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+}
+
+.submenu_item {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    transition: background-color 0.3s;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 20px;  /* Tamanho letras menu dentro */
+}
+
+.submenu_item > a > p {
+    display: inline-block;
+}
+
+.submenu_itens a {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+.submenu_item:hover {
+    background-color: rgba(211, 211, 211, 0.4);
+    border-radius: 5px;
+}
+
+.submenu_item h4 {
+    font-weight: 400;
+}
+
+.submenu_item p {
+    font-size: 16px;
+    color: chocolate;
+    margin-right: 10px;
+}
+
+.form {
+    padding: 30px 30px 20px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.form_input:not(:first-child) {
+    margin-top: 30px;
+}
+
+.form_input {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    border: 1px solid gray;
+}
+
+.form_btn {
+    display: block;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    padding: 20px 30px;
+    border: none;
+    outline: none;
+    margin-top: 30px;
+    background-color: black;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+/*  Fim Cabeçalho  */

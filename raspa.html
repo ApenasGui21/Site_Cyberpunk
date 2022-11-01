@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> SAMURAI </title>
+        <link rel="stylesheet" href="css/style1.css">
+
+    </head>
+    <body>
+        <section>
+            <div class="content">
+                <h2>É HORA DE ACORDAR SAMURAI</h2>
+                <img src="img/samurailn.jpg" class = "samurai">
+                <p>O MUNDO PRECISA DE VOCÊ, VOCÊ ESTÁ PRONTO ?</p>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js">
+        </script>
+        <script>
+            function setup(){
+                createCanvas(windowWidth, windowHeight);
+            }
+
+            function draw(){
+                strokeWeight(50);
+                if(mouseIsPressed === true){
+                    line(mouseX, mouseY, pmouseX, pmouseY)
+                }
+            }
+        </script>
+    </body>
+</html>
